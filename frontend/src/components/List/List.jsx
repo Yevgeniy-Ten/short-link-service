@@ -1,6 +1,7 @@
 import React from "react";
 import {Pane, Paragraph, majorScale} from "evergreen-ui";
 import LItem from "./LItem";
+import PropTypes from "prop-types"
 
 const List = ({data}) => {
     return (
@@ -16,5 +17,13 @@ const List = ({data}) => {
         </Pane>
     );
 };
+
+List.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        short: PropTypes.string.isRequired,
+        main: PropTypes.string.isRequired
+    }))
+}
 
 export default List;

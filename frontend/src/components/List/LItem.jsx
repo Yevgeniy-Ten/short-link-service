@@ -1,5 +1,6 @@
 import React from "react";
 import {Pane, majorScale, InfoSignIcon, Tooltip, Button, ArrowRightIcon} from "evergreen-ui";
+import PropTypes from "prop-types"
 
 const LItem = ({shortLink, link}) => {
     return (
@@ -8,10 +9,14 @@ const LItem = ({shortLink, link}) => {
                 <InfoSignIcon color={"info"}/>
             </Tooltip>
             <Button height={40} marginLeft={majorScale(2)} iconAfter={ArrowRightIcon}>
-               Go to: {shortLink}
+                Go to: {shortLink}
             </Button>
         </Pane>
     );
 };
+LItem.propTypes = {
+    shortLink: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired
+}
 
 export default LItem;
