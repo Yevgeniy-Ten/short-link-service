@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "./src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "serve": "NODE_ENV=development nodemon ./src/index.js",
+    "start": "NODE_ENV=production node ./src/index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.8",
+    "nanoid": "^3.1.20"
+  }
+}
