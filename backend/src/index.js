@@ -2,6 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
 const {PORT, frontendURL, mongoURI, pagesPath} = require("../configuration")
+const shortRouter = require("./routes/shorter.route")
 
 const app = express()
 
@@ -17,7 +18,8 @@ const start = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
-        app.get("*", (req, res) => {
+        app.use("/api/shorter", shortRouter)
+        app.use("*", (req, res) => {
             const pageNotFoundPath = `${pagesPath}/404.html`
             res.status(404).sendFile(pageNotFoundPath)
         })

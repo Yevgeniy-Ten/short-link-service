@@ -11,5 +11,5 @@ module.exports = {
     PORT,
     frontendURL,
     mongoURI,
-    pagesPath
+    pagesPath,
 }
