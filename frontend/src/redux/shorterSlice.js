@@ -1,25 +1,21 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {createShortLink, getAllLinks} from "./shorterActions";
 
 
 const shorterSlice = createSlice({
     name: "shorter",
     initialState: {
-        links: [{
-            main: "http:localhost:3000",
-            short: "get333",
-            id: 1
-        }, {
-            main: "http:localhost:3000",
-            short: "get333",
-            id: 2
-        },
-            {
-                main: "http:localhost:3000",
-                short: "get333",
-                id: 3
-            }]
+        links: []
     },
-    reducers: {}
+    reducers: {},
+    extraReducers: {
+        [getAllLinks.fulfilled]: (state, {payload: links = []}) => {
+            state.links = links
+        },
+        [createShortLink.fulfilled]: (state, {payload: newLink}) => {
+            state.links = [newLink, ...state.links]
+        }
+    }
 })
 
 export const {reducer: shortReducer} = shorterSlice

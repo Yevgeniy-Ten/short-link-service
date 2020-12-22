@@ -6,10 +6,10 @@ const generateShortLink = () => {
 }
 const validateURL = (url) => {
     let urlIsValid = false
-    const domains = ["com", "ru", "kz", "org"]
+    const domains = ["com", "ru", "kz", "org","to"]
     let urlDomain = url.split(".")[1]
     if (urlDomain) {
-        urlIsValid = domains.find(domain => domain === urlDomain)
+        urlIsValid = domains.find(domain => url.includes(domain))
     }
     return urlIsValid
 }

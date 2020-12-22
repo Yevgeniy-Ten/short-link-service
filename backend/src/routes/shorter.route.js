@@ -35,7 +35,6 @@ router.get("/:short", async (req, res) => {
     try {
         const {short} = req.params
         const link = await Link.findOne({short})
-        console.log(link)
         if (!link) {
             return res.status(404).json({msg: "Link not found"})
         }

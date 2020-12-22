@@ -1,10 +1,16 @@
-import React from "react";
+import React, {useRef} from "react";
 import {AddIcon, Button, Pane, TextInput} from "evergreen-ui";
+import PropTypes from "prop-types"
 
-const Form = () => {
+const Form = ({onSubmit}) => {
+    const linkRef = useRef()
+    const onSubmitHandler = (e) => {
+        e.preventDefault()
+        onSubmit(linkRef.current.value)
+    }
     return (
-        <Pane is={"form"} display={"flex"} height={64}>
-            <TextInput width="100%" height={48} placeholder="Paste your link"/>
+        <Pane onSubmit={onSubmitHandler} is={"form"} display={"flex"} height={64}>
+            <TextInput ref={linkRef} width="100%" height={48} placeholder="Paste your link"/>
             <Button height={48}
                     width={200}
                     appearance={"primary"}
@@ -14,5 +20,9 @@ const Form = () => {
         </Pane>
     );
 };
+
+Form.propTypes = {
+    onSubmit: PropTypes.func.isRequired
+}
 
 export default Form;

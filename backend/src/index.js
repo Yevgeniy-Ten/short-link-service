@@ -6,10 +6,7 @@ const shortRouter = require("./routes/shorter.route")
 
 const app = express()
 
-app.use(cors({
-    origin: frontendURL,
-    optionsSuccessStatus: 200
-}))
+app.use(cors())
 app.use(express.json())
 app.use(express.static("public"))
 const start = async () => {
