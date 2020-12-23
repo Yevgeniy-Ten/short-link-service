@@ -1,8 +1,9 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
-const {PORT, frontendURL, mongoURI, pagesPath} = require("../configuration")
+const {PORT, mongoURI, pagesPath} = require("../configuration")
 const shortRouter = require("./routes/shorter.route")
+const authRouter = require("./routes/auth.route")
 
 const app = express()
 
@@ -15,6 +16,7 @@ const start = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
+        app.use("/api/auth", authRouter)
         app.use("/api/shorter", shortRouter)
         app.use("*", (req, res) => {
             const pageNotFoundPath = `${pagesPath}/404.html`

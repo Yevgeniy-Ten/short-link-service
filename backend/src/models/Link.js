@@ -1,4 +1,4 @@
-const {Schema, model} = require("mongoose")
+const {Schema, model, Types} = require("mongoose")
 
 const Link = new Schema({
     main: {
@@ -12,6 +12,11 @@ const Link = new Schema({
     clicks: {
         type: Number,
         default: 0
+    },
+    owner: {
+        type: Types.ObjectId,
+        required: true,
+        ref: "User"
     }
 })
 

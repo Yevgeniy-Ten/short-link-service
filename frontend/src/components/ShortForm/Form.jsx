@@ -1,17 +1,23 @@
-import React, {useRef} from "react";
+import React, {useEffect, useRef} from "react";
 import {AddIcon, Button, Pane, TextInput} from "evergreen-ui";
 import PropTypes from "prop-types"
 
-const Form = ({onSubmit}) => {
+const ShortForm = ({onSubmit, isCreated, isLoad}) => {
     const linkRef = useRef()
     const onSubmitHandler = (e) => {
         e.preventDefault()
         onSubmit(linkRef.current.value)
     }
+    useEffect(() => {
+        if (isCreated) {
+            linkRef.current.value = ""
+        }
+    }, [isCreated])
     return (
         <Pane onSubmit={onSubmitHandler} is={"form"} display={"flex"} height={64}>
             <TextInput ref={linkRef} width="100%" height={48} placeholder="Paste your link"/>
-            <Button height={48}
+            <Button disabled={isLoad}
+                    height={48}
                     width={200}
                     appearance={"primary"}
                     intent={"success"}
@@ -21,8 +27,8 @@ const Form = ({onSubmit}) => {
     );
 };
 
-Form.propTypes = {
+ShortForm.propTypes = {
     onSubmit: PropTypes.func.isRequired
 }
 
-export default Form;
+export default ShortForm

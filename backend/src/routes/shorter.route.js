@@ -1,19 +1,20 @@
 const {Router} = require("express")
 const {generateShortLink} = require("../assets/assets")
 const linkMiddleware = require("../middlewares/link.middleware")
+const checkLoginMiddleware = require("../middlewares/login.middleware")
 const Link = require("../models/Link")
 
 const router = Router()
 
-router.get("/", async (req, res) => {
+router.get("/", checkLoginMiddleware(), async (req, res) => {
     try {
-        const links = await Link.find()
+        const links = await Link.find({owner: req.userId})
         res.send(links)
     } catch (e) {
         res.status(500).json({msg: "Server error"})
     }
 })
-router.post("/", linkMiddleware(), async (req, res) => {
+router.post("/", [checkLoginMiddleware(), linkMiddleware()], async (req, res) => {
     try {
         const {url} = req.body
         let short = generateShortLink()
@@ -23,7 +24,7 @@ router.post("/", linkMiddleware(), async (req, res) => {
             existing = await Link.findOne({short})
         }
         const newLink = new Link({
-            main: url, short
+            main: url, short, owner: req.userId
         })
         await newLink.save()
         res.status(201).json(newLink)
