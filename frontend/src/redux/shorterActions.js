@@ -19,7 +19,3 @@ export const createShortLink = createAsyncThunk("axiosCreateLink", async (link, 
     })
     return response.data
 })
-
-export const goToPageByLink = createAsyncThunk("axiosGoToPageByLink", async (shortLink) => {
-    await request.get(`/api/shorter/${shortLink}`)
-})

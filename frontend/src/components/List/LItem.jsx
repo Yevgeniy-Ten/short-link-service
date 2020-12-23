@@ -3,7 +3,7 @@ import {Pane, majorScale, InfoSignIcon, Tooltip, Button, ArrowRightIcon, Text} f
 import {serverURL} from "../../config/axios";
 import PropTypes from "prop-types"
 
-const LItem = ({shortLink, link, goToPage, clicks}) => {
+const LItem = ({shortLink, link, clicks}) => {
     const shortLinkPath = `${serverURL}/api/shorter/${shortLink}`
     return (
         <Pane marginBottom={majorScale(1)} flex={1} alignItems={"center"}>
